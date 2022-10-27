@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+      
+	<h:body>
+		<h:form>
+			 Select City : 
+        <h:selectOneMenu value="#{cityBean.city}" > 
+        <f:selectItem itemValue="Banglore" itemLabel="Banglore" />
+        <f:selectItem itemValue="Chennai" itemLabel="Chennai" />
+        <f:selectItem itemValue="Hyderabad" itemLabel="Hyderabad" />
+        <f:selectItem itemValue="Delhi" itemLabel="Delhi"/>
+        <f:selectItem itemValue="Mangalore" itemLabel="Manglore" />
+         </h:selectOneMenu>
+         <br/><br/>
+         <h:commandButton value="Submit" action="showCity">
+         </h:commandButton>
+		</h:form>
+	</h:body>
+</html>
