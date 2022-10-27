@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This web.xml file is not required when using Servlet 3.0 container,
+     see implementation details http://jersey.java.net/nonav/documentation/latest/jax-rs.html -->
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" version="2.5">
+  <servlet>
+    <servlet-name>Jersey Web Application</servlet-name>
+    <servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
+    <init-param>
+      <param-name>jersey.config.server.provider.packages</param-name>
+      <param-value>com.infinite.Servlet</param-value>
+    </init-param>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Jersey Web Application</servlet-name>
+    <url-pattern>/webapi/*</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployShow</display-name>
+    <servlet-name>EmployShow</servlet-name>
+    <servlet-class>com.infinite.Servlet.EmployShow</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployShow</servlet-name>
+    <url-pattern>/EmployShow</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmploySearch</display-name>
+    <servlet-name>EmploySearch</servlet-name>
+    <servlet-class>com.infinite.Servlet.EmploySearch</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmploySearch</servlet-name>
+    <url-pattern>/EmploySearch</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>EmployInserServlet</display-name>
+    <servlet-name>EmployInserServlet</servlet-name>
+    <servlet-class>com.infinite.Servlet.EmployInserServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>EmployInserServlet</servlet-name>
+    <url-pattern>/EmployInserServlet</url-pattern>
+  </servlet-mapping>
+</web-app>
