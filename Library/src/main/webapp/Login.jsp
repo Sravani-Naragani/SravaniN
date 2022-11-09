@@ -1,4 +1,5 @@
-<%@page import="com.infinite.Library.LibraryDAO"%>
+
+<%@page import="com.infinite.library.LibraryDAO"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
