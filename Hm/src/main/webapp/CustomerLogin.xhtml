@@ -1,0 +1,24 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
+	<h:body>
+	
+	<h1>Customer Authentication</h1>
+		<h:form>
+			User Name : 
+			<h:inputText id="username" value="#{customer.username}" 
+					size="20" required="true" label="username">
+			<f:validateRequired/>
+				</h:inputText>
+				<h:message for="username" style="color:red"/>
+			<br/><br/>
+			Password:
+        <h:inputSecret id="password" value="#{customer.pass}"  /> <br/><br/>
+			<h:commandButton value="login" action="#{hotelDetailsDAO.CustomerLogin(username,password)}"></h:commandButton>
+		
+		</h:form>
+	</h:body>
+</html>
