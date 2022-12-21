@@ -11,5 +11,10 @@
         <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
          <mapping class="com.infinite.hotel.AdminDetails"/>
           <mapping class="com.infinite.hotel.CustomerDetails"/>
+          <mapping class="com.infinite.hotel.HotelDetails"/>
+        <mapping class="com.infinite.hotel.Room"/>
+        <mapping class="com.infinite.hotel.RoomBooking"/>
+        <mapping class="com.infinite.hotel.BillingDetails"/>
+        <mapping class="com.infinite.hotel.Payment"/>
     </session-factory>
 </hibernate-configuration>

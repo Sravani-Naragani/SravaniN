@@ -37,7 +37,19 @@ import javax.persistence.Column;
 	    @Column(name="IdProof")
 	    private String idProof;
 	    
-	    @Column(name="City")
+	    @Column(name="Email")
+	    private String email;
+	    
+
+		public String getEmail() {
+			return email;
+		}
+
+		public void setEmail(String email) {
+			this.email = email;
+		}
+
+		@Column(name="City")
 	    private String city;
 
 	    public String getUsername() {
@@ -95,7 +107,8 @@ import javax.persistence.Column;
 		public void setIdProof(String idProof) {
 			this.idProof = idProof;
 		}
-
+		
+		
 		public String getCity() {
 			return city;
 		}

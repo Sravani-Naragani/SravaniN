@@ -7,6 +7,9 @@ import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import javax.faces.bean.ManagedBean;
+
+  @ManagedBean(name="room")
 @Entity
 @Table(name="RoomDetails")
 

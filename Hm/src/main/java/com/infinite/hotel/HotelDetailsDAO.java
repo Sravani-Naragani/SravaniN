@@ -12,6 +12,11 @@ import org.hibernate.criterion.Projection;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import javax.faces.bean.ManagedBean;
+import javax.faces.application.FacesMessage;
+
+import javax.faces.component.UIComponent;
+import javax.faces.component.UIInput;
+import javax.faces.context.FacesContext;
 
 
 
@@ -71,7 +76,7 @@ public String addhotel(HotelDetails hotel) {
 	hotel.setHotelId(hotelId);	
 	session.save(hotel);
 	t.commit();
-	return "Hotel Added";
+	return "AddHotel.xhtml?faces-redirect=true";
 	}
 
 // show Hotel
@@ -115,7 +120,7 @@ public String addroom(Room room){
     tran.commit();
     session.close();
 
-    return "Room Added Successfully...";
+    return "AddRoom.xhtml?faces-redirect=true";
 }
 
 //ShowAvailability of Rooms
@@ -201,7 +206,8 @@ public List<HotelDetails> showroom() {
 			session.update(rooms);
 			transaction.commit();
 			session.close();
-			return "Book Date: " +bookDate+"Room Booked and Have a nice vacation..";
+			return "addCustomer.xhtml?faces-redirect=true"
+			 +bookDate+"Room Booked and Have a nice vacation..";
 		}
 	
 		 //date
@@ -239,7 +245,7 @@ public List<HotelDetails> showroom() {
 			
 			session.save(customerdetails);
 			t.commit();
-			return "Customer Registration Successfull";
+			return "addCustomer.xhtml?faces-redirect=true";
 			}
 		
 
@@ -264,7 +270,7 @@ Transaction t = session.beginTransaction();
 admin.setAdminsId(adminsId);	
 session.save(admin);
 t.commit();
-return "Now You are an Admin";
+return "addAdmin.xhtml?faces-redirect=true";
 }
 public int isExistsUser(String username) {
 sFactory = SessionHelper.getConnection();
@@ -278,33 +284,40 @@ return count;
 
 }
 
-public String CustomerLogin(String username, String pass) {
-sFactory = SessionHelper.getConnection();
-Session session = sFactory.openSession();
-Criteria cr = session.createCriteria(CustomerDetails.class);
-cr.add(Restrictions.eq("username", username));
-cr.add(Restrictions.eq("pass", pass));
- List<CustomerDetails> listcustomer = cr.list();
- if(listcustomer.size()==1) {
-     return "/JSF_FILES/ShowCustomer1.xhtml?faces-redirect=true";
- }
- return "/CustomerLogin.xhtml?faces-redirect=true";
-}
+public String checkUsers(CustomerDetails customer) {
+    sFactory = SessionHelper.getConnection();
+    Session session = sFactory.openSession();
+    Criteria cr = session.createCriteria(CustomerDetails.class);
+    cr.add(Restrictions.eq("username", customer.getUsername()));
+    cr.add(Restrictions.eq("pass", customer.getPass()));
+    System.out.println(customer.getPass());
+    System.out.println(customer.getUsername());
+    List<CustomerDetails> listcustomer = cr.list();
+    if(listcustomer.size()==1) {
+        return "ShowCustomer1.xhtml?faces-redirect=true";
+    }else 
+    {
+        return "CustomerLogin.xhtml?faces-redirect=true";
+    }
     
- 
+}
 
-		 public String AdminLogin(String adminName, String pass){
-		        sFactory = SessionHelper.getConnection();
-		        Session session = sFactory.openSession();
-		        Criteria cr = session.createCriteria(AdminDetails.class);
-		        cr.add(Restrictions.eq("adminName", adminName));
-		        cr.add(Restrictions.eq("pass", pass));
-		        List<AdminDetails> adminList = cr.list();
-		        if(adminList.size()==1) {
-		            return "login successfull";
-		        }
-		        return "invalid credentials";
-		       }
+public String checkAdmins(AdminDetails admin) {
+    sFactory = SessionHelper.getConnection();
+    Session session = sFactory.openSession();
+    Criteria cr = session.createCriteria(AdminDetails.class);
+    cr.add(Restrictions.eq("adminName", admin.getAdminName()));
+    cr.add(Restrictions.eq("pass", admin.getPass()));
+    
+    List<AdminDetails> listadmin = cr.list();
+    if(listadmin.size()==1) {
+        return "AdminLogin.xhtml?faces-redirect=true";
+    }else 
+    {
+        return "Invalid Credentials";
+    }
+    
+}
 	
 
 	    public List<CustomerDetails> CustomerShow() {
@@ -316,6 +329,92 @@ cr.add(Restrictions.eq("pass", pass));
 	        
 	        }
 
+		public void validatePhnNo(FacesContext context, UIComponent comp,
+				Object value) {
+
+			System.out.println("inside validate method");
+
+			String mno = (String) value;
+			boolean flag=false;
+			if (mno.matches("\\d{10}"))  
+			{ flag=true;}
+			
+		      if(flag==false) {
+		    	  ((UIInput) comp).setValid(false);
+
+					FacesMessage message = new FacesMessage(
+							"invalid PhnNo");
+					context.addMessage(comp.getClientId(context), message); 
+		      }
+			
+		
+
+		}
+		
+		public void validatezipcode(FacesContext context, UIComponent comp,
+				Object value) {
+
+			System.out.println("inside validate method");
+
+			String zno = (String) value;
+			boolean flag=false;
+			if (zno.matches("\\d{6}"))  
+			{ flag=true;}
+			
+		      if(flag==false) {
+		    	  ((UIInput) comp).setValid(false);
+
+					FacesMessage message = new FacesMessage(
+							"invalid zipcode");
+					context.addMessage(comp.getClientId(context), message); 
+		      }
+			
+		
+
+		}
+		
+		public void validatePassword(FacesContext context, UIComponent comp,
+				Object value) {
+
+			System.out.println("inside validate method");
+
+			String mno = (String) value;
+			String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}";
+		      boolean result=mno.matches(pattern);
+		      if(result==false) {
+		    	  ((UIInput) comp).setValid(false);
+
+					FacesMessage message = new FacesMessage(
+							"Create Strong Password with Atleast one uppercase, one Lowercase and Special characters");
+					context.addMessage(comp.getClientId(context), message); 
+		      }
+			
+		
+		}
+		public void validateEmail(FacesContext context, UIComponent comp,
+				Object value) {
+
+			System.out.println("inside validate method");
+
+			String mno = (String) value;
+			if (mno.indexOf('@')==-1) {
+				((UIInput) comp).setValid(false);
+
+				FacesMessage message = new FacesMessage(
+						"invalid Email");
+				context.addMessage(comp.getClientId(context), message);
+			}
+			if (mno.length() < 6) {
+				((UIInput) comp).setValid(false);
+
+				FacesMessage message = new FacesMessage(
+						"Minimum length of model number is 6");
+				context.addMessage(comp.getClientId(context), message);
+
+			}
+
+		}
+		
 public int billAmt(String bookId,int days) {
 	RoomBooking booking=searhByBookId(bookId);
 	String roomId=booking.getRoomId();

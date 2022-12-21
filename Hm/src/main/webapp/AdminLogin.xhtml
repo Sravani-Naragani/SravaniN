@@ -1,23 +1,21 @@
-
+<?xml version="1.0" encoding="ISO-8859-1" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
-	<h:body>
-	
-	<h1>Admin Authentication</h1>
-		<h:form>
-			Admin Name : 
-			<h:inputText id="adminName" value="#{admin.adminName}" 
-					size="20" required="true" label="adminName">
-			<f:validateRequired/>
-				</h:inputText>
-				<br/><br/>
-			Admin Password:
-        <h:inputSecret id="password" value="#{admin.pass}"  /> <br/><br/>
-			<h:commandButton value="login" action="#{hotelDetailsDAO.AdminLogin(adminName,password)}"></h:commandButton>
-		
-		</h:form>
-	</h:body>
+      xmlns:h="http://java.sun.com/jsf/html">
+    
+   <h:body>
+   <h1>Hotel Management</h1>
+   <h2>Admin Authentication</h2>
+       
+        <h:form >
+        Admin Name:
+        <h:inputText value="#{admin.adminName}" id="u"  /> <br/><br/>
+        Password:
+        <h:inputSecret value="#{admin.pass}" id="p" /> <br/><br/>
+            
+            <h:commandButton value="Login" action="#{hotelDetailsDAO.checkAdmins(admin)}"></h:commandButton>
+        </h:form>
+    </h:body>
 </html>
